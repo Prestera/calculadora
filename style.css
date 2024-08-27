@@ -1,0 +1,90 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0c6;
+}
+
+.calculadora {
+    width: 320px;
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.visor {
+    background-color: #000;
+    color: #fff;
+    text-align: right;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.subPantalla {
+    font-size: 18px;
+    color: #aaa;
+}
+
+.pantalla {
+    font-size: 32px;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.btn {
+    width: 20%;
+    padding: 15px;
+    margin: 5px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4d4d4d;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#operadores{
+    background-color: #151a51;
+    color: #f3e81fba;
+}
+#operadores:active {
+    background-color: #161eaec7;
+}
+
+
+.btn:active {
+    background-color: #808080;
+}
+
+.btn#c, .btn#borrar {
+    background-color: #d9534f;
+}
+
+.btn#c:active, .btn#borrar:active {
+    background-color: #c9302c;
+}
+
+#igual {
+    background-color: #5bc0de;
+    width: 44%; 
+    box-sizing: border-box; 
+}
+
+.btn#igual:active {
+    background-color: #31b0d5;
+}
+
+#cero {
+    width: 45%; 
+    box-sizing: border-box; 
+}
+
+.btn:hover {
+    background-color: #666;
+}
