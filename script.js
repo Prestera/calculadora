@@ -1,7 +1,10 @@
 const subPantalla = document.querySelector(".subPantalla");
 const pantalla = document.querySelector(".pantalla");
 const botones = document.querySelectorAll(".btn");
-const limiteCaracteres = 12;
+
+let operacionActual = '';
+let operadorSeleccionado = '';
+let nuevoNumero = false;
 
 botones.forEach(boton => {
     boton.addEventListener("click", () => {
@@ -10,6 +13,9 @@ botones.forEach(boton => {
         if (boton.id === "c") {
             pantalla.textContent = "0";
             subPantalla.textContent = "";
+            operacionActual = '';
+            operadorSeleccionado = '';
+            nuevoNumero = false;
             return;
         }
 
@@ -24,39 +30,31 @@ botones.forEach(boton => {
 
         if (boton.id === "igual") {
             try {
-                 
-                subPantalla.textContent = pantalla.textContent + " =";
-                pantalla.textContent = eval(pantalla.textContent);
-              
-                
+                const resultado = eval(operacionActual + pantalla.textContent);
+                subPantalla.textContent = `${operacionActual}${pantalla.textContent} =`;
+                pantalla.textContent = resultado;
+                operacionActual = ''; // Resetea la operación actual
+                operadorSeleccionado = ''; // Resetea el operador seleccionado
+                nuevoNumero = true;
             } catch {
                 pantalla.textContent = "Error!";
             }
             return;
         }
 
-
-        if (pantalla.textContent.length < limiteCaracteres) {
-            if (pantalla.textContent === "0" || pantalla.textContent === "Error!") {
-                pantalla.textContent = botonApretado;
-            } else {
-                const ultimoCaracter = pantalla.textContent.slice(-1);
-                const esOperador = ["+", "-", "*", "/"].includes(botonApretado);
-                const esUltimoCaracterOperador = ["+", "-", "*", "/"].includes(ultimoCaracter);
-
-                if (esOperador && esUltimoCaracterOperador) {
-                    pantalla.textContent = pantalla.textContent.slice(0, -1) + botonApretado;
-                } else {
-                    if(botonApretado === esOperador){
-                        subPantalla.textContent += pantalla.textContent;
-                        
-                    }
-                    pantalla.textContent += botonApretado;
-                }
-            }
+        if (boton.id === "operadores") {
+            operadorSeleccionado = botonApretado;
+            operacionActual = pantalla.textContent + operadorSeleccionado;
+            subPantalla.textContent = operacionActual;
+            nuevoNumero = true;
+            return;
         }
-    })
 
-
-
-})
+        if (pantalla.textContent === "0" || pantalla.textContent === "Error!" || nuevoNumero) {
+            pantalla.textContent = botonApretado;
+            nuevoNumero = false;
+        } else {
+            pantalla.textContent += botonApretado;
+        }
+    });
+});
